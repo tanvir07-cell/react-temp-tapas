@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SEARCH from "../../assets/search.svg"
+import { useLocation } from '../../context/LocationProvider'
+import { getLocationByName } from '../../utils/index.mjs'
+
+
 
 const SearchLocation = () => {
+	const [input, setInput] = useState('')
+	const {location,setLocation} = useLocation()
+	
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		const locationData = getLocationByName(input.toString().toLowerCase())
+		
+		setLocation(locationData)
+	}
+		
+
   return (
-    <form action="#">
+    <form action="#" onSubmit={handleSubmit}>
 					<div className="flex items-center space-x-2 py-2 px-3 group focus-within:bg-black/30 transition-all border-b border-white/50 focus-within:border-b-0 focus-within:rounded-md">
-						<input className="bg-transparent  placeholder:text-white text-white w-full text-xs md:text-base outline-none border-none"
+						<input 
+						 onChange={(e)=>setInput(e.target.value)}
+						className="bg-transparent  placeholder:text-white text-white w-full text-xs md:text-base outline-none border-none"
 							type="search" placeholder="Search Location" required />
 						<button type="submit">
 							<img src={SEARCH}/>

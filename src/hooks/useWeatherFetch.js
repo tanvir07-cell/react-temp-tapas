@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "../context/LocationProvider";
 
 export default function useWeatherFetch(){
     const [weatherData, setWeatherData] = useState({
@@ -20,6 +21,8 @@ export default function useWeatherFetch(){
     });
 
     const [error,setError] = useState(null)
+
+    const {location} = useLocation()
 
     async function fetchWeatherData(lat,lon){
         try{
@@ -79,6 +82,11 @@ export default function useWeatherFetch(){
 
         })
 
+        if(location.latitude && location.longitude){
+            fetchWeatherData(location.latitude,location.longitude)
+        }
+
+        else{
 
 
 
@@ -88,7 +96,8 @@ export default function useWeatherFetch(){
                 position.coords.longitude
             );
         });
-    },[])
+    }
+    },[location.latitude,location.longitude])
 
 
 

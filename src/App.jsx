@@ -1,19 +1,21 @@
 
-import Header from './components/Header/Header'
-import WeatherBoard from './components/Weather/WeatherBoard'
+import Page from './Page'
+import FavouriteProvider from './context/FavouriteProvider'
+import LocationProvider from './context/LocationProvider'
 import WeatherDataProvider from './context/WeatherDataProvider'
 
 function App() {
 
   return (
+    <LocationProvider>
 <WeatherDataProvider>
- <Header/>
- <main>
-   <section className="mt-52">
-     <WeatherBoard/>
-   </section>
- </main>
+  <FavouriteProvider>
+    <Page/>
+ 
+ </FavouriteProvider>
+
 </WeatherDataProvider>
+</LocationProvider>
   )
 }
 
