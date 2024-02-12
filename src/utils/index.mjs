@@ -97,7 +97,11 @@ function getLocations() {
 }
 
 function getLocationByName(location) {
-    if (!location) return null;
+    if (!location) return {
+            location: "",
+            latitude: 0,
+            longitude: 0,
+    };
 
     const filtered = data.filter((item) => item.location.toLowerCase() === location);
 
